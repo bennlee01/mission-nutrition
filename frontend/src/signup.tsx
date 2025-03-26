@@ -59,66 +59,62 @@ const SignUp: React.FC = () => {
         <div className="signup-image-container">
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/47235d292be9fb2058114195360fb9db75e7b8594da02971d9bf0922d658ec75?placeholderIfAbsent=true&apiKey=12e28406f08449fa85c02ddc97075e3b"
-            alt=""
+            alt="Signup illustration"
             className="signup-image"
           />
         </div>
 
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="input-group">
-            <div className="input-wrapper">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                className="signup-input"
-                aria-label="First Name"
-              />
-            </div>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className="signup-input"
+              aria-label="First Name"
+              required
+            />
           </div>
 
           <div className="input-group">
-            <div className="input-wrapper">
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                className="signup-input"
-                aria-label="Last Name"
-              />
-            </div>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className="signup-input"
+              aria-label="Last Name"
+              required
+            />
           </div>
 
           <div className="input-group">
-            <div className="input-wrapper">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="signup-input"
-                aria-label="Email"
-              />
-            </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="signup-input"
+              aria-label="Email"
+              required
+            />
           </div>
 
           <div className="input-group">
-            <div className="input-wrapper">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                className="signup-input"
-                aria-label="Password"
-              />
-            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className="signup-input"
+              aria-label="Password"
+              required
+            />
           </div>
 
           <button type="submit" className="signup-button">
