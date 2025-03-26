@@ -8,16 +8,19 @@ interface LoginFormData {
 }
 
 interface LoginProps {
-  onLogin: (isAuthenticated: boolean) => void; // Define the prop type for the login function
+  onLogin: (isAuthenticated: boolean) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
-  const navigate = useNavigate();  // Initialize navigate from react-router-dom
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<LoginFormData>({
     username: "",
     password: "",
   });
+
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,10 +32,26 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    if (formData.username === "user" && formData.password === "password") {
-      onLogin(true); // Call the onLogin prop function with true
+
+    // Basic validation
+    if (!formData.username || !formData.password) {
+      setError("Please fill in both fields");
+      return;
     }
+
+    setLoading(true);
+    setError(null);
+
+    // Simulate login process (Replace with real API call)
+    setTimeout(() => {
+      if (formData.username === "user" && formData.password === "password") {
+        onLogin(true); // Successful login
+        navigate("/dashboard"); // Redirect after successful login
+      } else {
+        setError("Invalid username or password.");
+      }
+      setLoading(false);
+    }, 1000);
   };
 
   const handleSignUpClick = () => {
@@ -47,7 +66,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         <div className="login-image-container">
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/19b62f6e8068e7cfce2cef4139c2ad0e9384f1d2"
-            alt=""
+            alt="Login Illustration"
             className="login-image"
           />
         </div>
@@ -63,6 +82,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 onChange={handleInputChange}
                 className="login-input"
                 aria-label="Username"
+                autoComplete="username"
               />
             </div>
           </div>
@@ -77,12 +97,15 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 onChange={handleInputChange}
                 className="login-input"
                 aria-label="Password"
+                autoComplete="current-password"
               />
             </div>
           </div>
 
-          <button type="submit" className="login-button">
-            Sign in
+          {error && <div className="error-message">{error}</div>}
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Signing in..." : "Sign in"}
           </button>
 
           <div className="signup-prompt">
